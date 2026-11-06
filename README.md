@@ -2,9 +2,10 @@
 ## Marketplace B2B de Sobras Industriais
 ### Fronteiras do sistema e atores externos: empresa compradora e empresa vendedora
 
-**Aluno(a):** EVELYN LOUISE DA SILVA DE SOUZA
-**Disciplina:** Engenharia de Software  
+**Aluna:** EVELYN LOUISE DA SILVA DE SOUZA
+**Disciplina:** Modelagem de Software
 **Data:** 06/11/2026
+**Modalidade:** Avaliação Prática Supervisionada (APS 2)
 
 ---
 
