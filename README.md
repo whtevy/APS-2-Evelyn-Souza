@@ -1,4 +1,4 @@
-# APS 2 — Dossiê de Arquitetura Viva
+# APS 2 — Dossiê de Arquitetura Viva e Modelagem Comportamental as-Code
 ## Marketplace B2B de Sobras Industriais
 ### Fronteiras do sistema e atores externos: empresa compradora e empresa vendedora
 
