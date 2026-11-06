@@ -1,0 +1,55 @@
+flowchart TB
+    subgraph R1["RAIA 1 — Empresa compradora"]
+        A([Início]) --> B["Selecionar anúncio de sobras"]
+        B --> C["Preencher valor, quantidade e condições"]
+        C --> D["Enviar proposta pelo Frontend"]
+    end
+
+    subgraph R2["RAIA 2 — Marketplace (Back-End)"]
+        E["API recebe CriarPropostaRequest"] --> F["PropostaService valida dados e anúncio"]
+        G{"[dados válidos e anúncio ativo]?"}
+        H["Salvar proposta como ENVIADA"]
+        I["Registrar auditoria"]
+        J{{"FORK — ações paralelas"}}
+        K["Publicar PropostaCriadaEvent"]
+        L{{"JOIN — sincronizar conclusão"}}
+        M["Retornar PropostaDTO (201)"]
+        N["Retornar ErroNegocioDTO (400)"]
+        O["Receber resposta do vendedor"]
+        P{"[resposta dentro do prazo e vendedor autorizado]?"}
+        Q{"[decisão == ACEITAR]?"}
+        R["Atualizar proposta para ACEITA"]
+        S["Criar TransacaoNegociada"]
+        T["Atualizar proposta para RECUSADA"]
+        U["Retornar RespostaPropostaDTO"]
+        V["Retornar ErroNegocioDTO (409)"]
+    end
+
+    subgraph R3["RAIA 3 — Empresa vendedora"]
+        W["Receber aviso de nova proposta"]
+        X["Analisar preço, quantidade e condições"]
+        Y["Escolher aceitar ou recusar"]
+    end
+
+    subgraph R4["RAIA 4 — Serviço de notificações"]
+        Z["Consumir PropostaCriadaEvent"]
+        AA["Notificar empresa vendedora"]
+        AB["Consumir PropostaAceitaEvent ou PropostaRecusadaEvent"]
+        AC["Notificar empresa compradora"]
+    end
+
+    D --> E --> F --> G
+    G -- "[sim]" --> H --> J
+    G -- "[não]" --> N --> AD([Fim — proposta inválida])
+    J --> I --> L
+    J --> K --> L
+    L --> M --> W
+    W --> Z --> AA --> X --> Y --> O
+    O --> P
+    P -- "[não]" --> V --> AE([Fim — resposta inválida])
+    P -- "[sim]" --> Q
+    Q -- "[sim]" --> R --> S --> U
+    Q -- "[não]" --> T --> U
+    S --> AB
+    T --> AB
+    AB --> AC --> AF([Fim — comprador notificado])
