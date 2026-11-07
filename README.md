@@ -376,22 +376,3 @@ aps2-nome-sobrenome/
 │       └── estados.mmd
 └── README.md
 ```
-
-## 11. Como visualizar e validar
-
-1. Extraia o ZIP e abra a pasta no VS Code.
-2. Instale uma extensão de visualização Mermaid para Markdown.
-3. Abra `README.md` e pressione `Ctrl + Shift + V` para visualizar os diagramas.
-4. Valide `workspace.dsl` em uma ferramenta compatível com Structurizr DSL.
-5. Confira se a stack proposta corresponde à stack definida pelo grupo.
-
-### Sugestão de evolução por commits
-
-- `docs: define fronteiras e atores externos do marketplace`
-- `docs: modela sequencia de envio e resposta de proposta`
-- `docs: adiciona atividades com raias e fork join`
-- `docs: modela estados do ciclo de vida da proposta`
-- `docs: adiciona visao C4 e ADR 0001`
-- `docs: revisa consistencia entre os artefatos`
-
-Faça commits reais à medida que revisar os arquivos. Não crie histórico artificial ou retroativo.
